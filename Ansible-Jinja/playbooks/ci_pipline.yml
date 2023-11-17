@@ -1,0 +1,37 @@
+- name: Play to build, upload, deploy changes
+  hosts: leaf1, leaf2
+  tasks:
+  - name: Load variables into local dictionary
+    ansible.builtin.include_vars:
+      file: ../vars/demo.yml
+      name: BGP
+  - name: Generate config from Jinja template
+    ansible.builtin.template:
+      src: "{{ lookup( 'env','PWD' ) }}/templates/demo.j2"
+      dest: "{{ lookup( 'env','PWD' ) }}/configs/{{ inventory_hostname }}_demo.cfg"
+
+- name: Play to upload configlets to CVP
+  hosts: cvp1
+  tasks:
+    - name: Upload configlets to CVP
+      arista.cvp.cv_configlet_v3:
+        configlets: "{{ configlet_list }}"
+        configlets_notes: "Added by an Ansible Playbook"
+      register: CVP_TASKS
+    - name: Run change control
+      arista.cvp.cv_task_v3:
+        tasks: "{{ CVP_TASKS.taskIds }}"
+
+- name: Configure devices in CVP
+  hosts: cvp1
+  tasks:
+    - name: Assign container and configlets to device
+      arista.cvp.cv_device_v3:
+        devices: "{{ cvp_devices }}"
+        apply_mode: strict
+      register: CVP_TASKS
+    - name: Run change control
+      arista.cvp.cv_task_v3:
+        tasks: "{{ CVP_TASKS.taskIds }}"
+
+  

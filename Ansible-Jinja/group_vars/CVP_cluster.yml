@@ -1,6 +1,22 @@
 configlet_list:
   test_configlet: "alias tonyb3 show ip interface brief"
-  leaf1_BGP: "{{ lookup('file', '../configs/leaf1_bgp.cfg') }}"
-  leaf2_BGP: "{{ lookup('file', '../configs/leaf2_bgp.cfg') }}"
-  leaf3_BGP: "{{ lookup('file', '../configs/leaf3_bgp.cfg') }}"
-  leaf4_BGP: "{{ lookup('file', '../configs/leaf4_bgp.cfg') }}"
+  leaf1_demo: "{{ lookup('file', '../configs/leaf1_demo.cfg') }}"
+  leaf2_demo: "{{ lookup('file', '../configs/leaf2_demo.cfg') }}"
+
+
+
+cvp_devices:
+  - fqdn: leaf1
+    parentContainerName: Leaf
+    configlets:
+      - ATD-INFRA
+      - leaf1-base
+      - MLAG_Left
+      - leaf1_BGP
+  - fqdn: leaf2
+    parentContainerName: Leaf
+    configlets: 
+      - ATD-INFRA
+      - leaf2-base
+      - MLAG_Right
+      - leaf2_BGP
