@@ -1,0 +1,14 @@
+---
+- name: Configure devices in CVP
+  hosts: cvp1
+  vars_files:
+    - ../vars/CVP_model_noMLAG.yml
+  tasks:
+    - name: Assign container and configlets to device
+      arista.cvp.cv_device_v3:
+        devices: "{{ cvp_devices }}"
+        apply_mode: strict
+      register: devices_output
+    - name: Run change control
+      arista.cvp.cv_task_v3:
+        tasks: "{{ devices_output.taskIds }}"

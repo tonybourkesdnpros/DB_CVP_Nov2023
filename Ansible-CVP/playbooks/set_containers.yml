@@ -1,0 +1,7 @@
+---
+- name: Set container topology
+  hosts: cvp1
+  tasks:
+    - name: Set container topology
+      arista.cvp.cv_container_v3:
+        topology: "{{ cvp_containers }}"

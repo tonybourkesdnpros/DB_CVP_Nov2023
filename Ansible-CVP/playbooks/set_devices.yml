@@ -1,0 +1,8 @@
+---
+- name: Configure devices in CVP
+  hosts: cvp1
+  tasks:
+    - name: Assign container and configlets to device
+      arista.cvp.cv_device_v3:
+        devices: "{{ cvp_devices }}"
+        apply_mode: strict
