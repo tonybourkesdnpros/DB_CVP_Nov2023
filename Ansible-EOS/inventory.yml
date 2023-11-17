@@ -1,0 +1,19 @@
+all:
+  vars:
+    ansible_user: arista
+    ansible_password: aristameoo
+    ansible_connection: httpapi
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_network_os: eos
+    ansible_httpapi_port: 443
+  children:
+    DC1:
+      children:
+        spines:
+          hosts:  
+            spine[1:4]:
+        leafs:
+          hosts:
+            leaf[1:4]:
+            borderleaf[1:2]:
