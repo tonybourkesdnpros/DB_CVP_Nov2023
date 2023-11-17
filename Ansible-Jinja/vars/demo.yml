@@ -1,0 +1,29 @@
+leaf1:
+  BGP:
+    ASN: 1
+  interfaces:
+    loopback0: 
+      ipv4_addr: 1.1.1.1
+      ipv4_mask: 32
+    ethernet3: 
+      ipv4_addr: 192.168.101.0
+      ipv4_mask: 31
+    ethernet4:
+      ipv4_addr: 192.168.101.4
+      ipv4_mask: 31
+leaf2:
+  BGP:
+    ASN: 2
+  interfaces:
+    loopback0: 
+      ipv4_addr: 2.2.2.2
+      ipv4_mask: 32
+    loopback1: 
+      ipv4_addr: 10.2.2.2
+      ipv4_mask: 32
+    Ethernet3: 
+      ipv4_addr: 192.168.101.2
+      ipv4_mask: 31
+    ethernet20:
+      ipv4_addr: 192.168.101.8
+      ipv4_mask: 31

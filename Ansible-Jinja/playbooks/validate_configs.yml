@@ -1,0 +1,14 @@
+---
+- name: Configlet validation
+  hosts: cvp1
+  vars:
+    VALIDATE_MODEL:
+      - device_name: leaf1
+        search_type: hostname #[hostname | serialNumber | fqdn]
+        local_configlets:
+          leaf1_BGP: "{{ lookup('file', '../configs/leaf1_demo.cfg') }}"
+  tasks:
+    - name: Validate Configs
+      arista.cvp.cv_validate_v3:
+        devices: "{{ VALIDATE_MODEL }}"
+        validate_mode: stop_on_warning 

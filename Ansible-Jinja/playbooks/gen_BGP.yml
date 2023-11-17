@@ -1,0 +1,12 @@
+---
+- name: Generate BGP config via Jinja
+  hosts: leaf1, leaf2, leaf3, leaf4
+  tasks:
+  - name: Load variables into local dictionary
+    ansible.builtin.include_vars:
+      file: ../vars/BGP.yml
+      name: BGP
+  - name: Generate config from Jinja template
+    ansible.builtin.template:
+      src: "{{ lookup('env','PWD') }}/templates/BGP.j2"
+      dest: "{{ lookup('env','PWD') }}/configs/{{ inventory_hostname }}_bgp.cfg"

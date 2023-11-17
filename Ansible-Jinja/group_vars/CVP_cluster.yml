@@ -1,0 +1,6 @@
+configlet_list:
+  test_configlet: "alias tonyb3 show ip interface brief"
+  leaf1_BGP: "{{ lookup('file', '../configs/leaf1_bgp.cfg') }}"
+  leaf2_BGP: "{{ lookup('file', '../configs/leaf2_bgp.cfg') }}"
+  leaf3_BGP: "{{ lookup('file', '../configs/leaf3_bgp.cfg') }}"
+  leaf4_BGP: "{{ lookup('file', '../configs/leaf4_bgp.cfg') }}"

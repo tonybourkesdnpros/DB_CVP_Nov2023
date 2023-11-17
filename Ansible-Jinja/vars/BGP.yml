@@ -1,0 +1,12 @@
+leaf1:
+  ASN: 1
+  router_id: 1.1.1.1
+leaf2:
+  ASN: 2
+  router_id: 2.2.2.2
+leaf3:
+  ASN: 3
+  router_id: 3.3.3.3
+leaf4:
+  ASN: 4
+  router_id: 4.4.4.4

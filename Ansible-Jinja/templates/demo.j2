@@ -1,0 +1,11 @@
+router bgp {{ BGP[inventory_hostname]['BGP']['ASN'] }}
+  router-id {{ BGP[inventory_hostname]['interfaces']['loopback0']['ipv4_addr'] }}
+
+{% for item in BGP[inventory_hostname]['interfaces'] %}
+interface {{ item }}
+{% if 'thernet' in item %}
+   no switchport
+{% endif %}
+   ip address {{ BGP[inventory_hostname]['interfaces'][item]['ipv4_addr']}}/{{ BGP[inventory_hostname]['interfaces'][item]['ipv4_mask']}}
+{% endfor %}
+
